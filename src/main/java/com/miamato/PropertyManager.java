@@ -16,14 +16,7 @@ public class PropertyManager {
         loadProperties(System.getProperty("test.data.folder") + testDataFileName);
     }
 
-    /*private String getTestDataFileName(String testDataFileName){
-        return System.getProperty("test.data.file.name") == null ?
-            "default.properties" : System.getProperty("test.data.file.name");
-    }*/
-
     public String getProperty(String propertyName){
-    //    if(instance == null)
-    //        instance = new PropertyManager();
         return properties.getProperty(propertyName);
     }
 

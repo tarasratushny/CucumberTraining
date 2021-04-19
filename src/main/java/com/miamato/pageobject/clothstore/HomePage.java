@@ -2,6 +2,7 @@ package com.miamato.pageobject.clothstore;
 
 import com.miamato.PropertyManager;
 import com.miamato.pageobject.BasePage;
+import com.miamato.pageobject.PageManager;
 import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,21 +19,21 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@class='login']")
     public WebElement loginButton;
 
-    public HomePage(WebDriver driver, PropertyManager propertyManager){
-        super(driver, propertyManager);
+    public HomePage(WebDriver driver, PropertyManager propertyManager, PageManager pageManager){
+        super(driver, propertyManager, pageManager);
     }
 
-    public HomePage open(){
+    public PageManager open(){
         logger.info("Trying to open application home page");
         driver.navigate().to(HOME_PAGE_URL);
-        return this;
+        return this.pageManager;
     }
 
-    public HomePage clickLoginButton(){
+    public PageManager clickLoginButton(){
         logger.info("Trying to click on login button on homepage");
         new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1))
             .until(ExpectedConditions.visibilityOf(loginButton)).click();
-        return this;
+        return this.pageManager;
     }
 
 }

@@ -19,7 +19,7 @@ public class DriverManager {
         return getDriver(driverType, "LOCAL");
     }
 
-    public WebDriver getDriver(String driverType, String gridMode){
+    public static WebDriver getDriver(String driverType, String gridMode){
 
         WebDriver requestedDriver = null;
         switch (driverType.toUpperCase(Locale.ROOT)) {
@@ -42,7 +42,7 @@ public class DriverManager {
         return requestedDriver;
     }
 
-    private WebDriver getRemoteDriver(Capabilities capabilities){
+    private static WebDriver getRemoteDriver(Capabilities capabilities){
         WebDriver requestedDriver = null;
         try{
 

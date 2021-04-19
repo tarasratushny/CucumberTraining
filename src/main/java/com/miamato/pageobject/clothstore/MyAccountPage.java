@@ -2,6 +2,7 @@ package com.miamato.pageobject.clothstore;
 
 import com.miamato.PropertyManager;
 import com.miamato.pageobject.BasePage;
+import com.miamato.pageobject.PageManager;
 import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,19 +20,21 @@ public class MyAccountPage extends BasePage {
     public WebElement myAccountHeading;
     @FindBy(xpath = "//span[contains(text(),'My addresses')]")
     public WebElement myAddressesButton;
+    @FindBy(xpath = "//a[@class='account']/span")
+    public WebElement headerMyAccountLink;
 
 
-    public MyAccountPage(WebDriver driver, PropertyManager propertyManager){
-        super(driver, propertyManager);
+    public MyAccountPage(WebDriver driver, PropertyManager propertyManager, PageManager pageManager){
+        super(driver, propertyManager, pageManager);
     }
 
-    public MyAccountPage openMyAddressesList(){
+    public PageManager openMyAddressesList(){
         logger.info("Waiting for My Account page to load");
         new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1))
             .until(ExpectedConditions.visibilityOf(myAccountHeading));
         logger.info("Clicking My Addresses button");
         myAddressesButton.click();
-        return this;
+        return this.pageManager;
     }
 
 

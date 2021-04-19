@@ -2,6 +2,7 @@ package com.miamato.pageobject.clothstore;
 
 import com.miamato.PropertyManager;
 import com.miamato.pageobject.BasePage;
+import com.miamato.pageobject.PageManager;
 import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,14 +49,14 @@ public class MyAddressesPage extends BasePage {
     public WebElement firstAddressDeleteButton;
 
 
-    public MyAddressesPage(WebDriver driver, PropertyManager propertyManager){
-        super(driver, propertyManager);
+    public MyAddressesPage(WebDriver driver, PropertyManager propertyManager, PageManager pageManager){
+        super(driver, propertyManager, pageManager);
     }
 
-    public MyAddressesPage waitForPageToLoad(){
+    public PageManager waitForPageToLoad(){
         logger.info("Waiting for My Addresses page to load");
         new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1))
             .until(ExpectedConditions.visibilityOf(myAddressesHeading));
-        return this;
+        return this.pageManager;
     }
 }

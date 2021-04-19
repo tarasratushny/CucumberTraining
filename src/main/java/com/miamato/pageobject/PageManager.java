@@ -13,26 +13,38 @@ public class PageManager {
     public WebDriver driver;
     public PropertyManager propertyManager;
 
-    public HomePage homePage;
-    public LoginPage loginPage;
-    public MyAddressesPage myAddressesPage;
-    public MyAccountPage myAccountPage;
+    private HomePage homePage;
+    private LoginPage loginPage;
+    private MyAddressesPage myAddressesPage;
+    private MyAccountPage myAccountPage;
 
-    public PageManager(ITestContext context, PropertyManager propertyManager){
-        this.driver = (WebDriver) context.getAttribute("WebDriver");
+    public PageManager(WebDriver driver, PropertyManager propertyManager){
+        this.driver = driver;
         this.propertyManager = propertyManager;
     }
 
     public HomePage homePage(){
-        if(this.homePage == null)
-            homePage = new HomePage(driver, propertyManager);
+        if(homePage == null)
+            homePage = new HomePage(driver, propertyManager, this);
         return homePage;
     }
 
     public LoginPage loginPage(){
-        if(this.loginPage == null)
-            loginPage = new LoginPage(driver, propertyManager);
+        if(loginPage == null)
+            loginPage = new LoginPage(driver, propertyManager, this);
         return loginPage;
+    }
+
+    public MyAddressesPage myAddressesPage(){
+        if(myAddressesPage == null)
+            myAddressesPage = new MyAddressesPage(driver, propertyManager, this);
+        return myAddressesPage;
+    }
+
+    public MyAccountPage myAccountPage(){
+        if(myAccountPage == null)
+            myAccountPage = new MyAccountPage(driver, propertyManager, this);
+        return myAccountPage;
     }
 
 }

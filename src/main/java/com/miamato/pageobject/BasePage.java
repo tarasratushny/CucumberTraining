@@ -12,11 +12,17 @@ public abstract class BasePage extends Page {
 
     protected WebDriver driver;
     protected PropertyManager propertyManager;
+    protected PageManager pageManager;
 
-    public BasePage(WebDriver driver, PropertyManager propertyManager){
+    public BasePage(WebDriver driver, PropertyManager propertyManager, PageManager pageManager){
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
         this.propertyManager = propertyManager;
+        this.pageManager = pageManager;
+    }
+
+    public String getPageTitle(){
+        return driver.getTitle();
     }
 
     protected void selectFromDropdownByValue(WebElement element, String value, Logger logger){

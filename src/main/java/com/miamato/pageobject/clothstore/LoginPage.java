@@ -2,6 +2,7 @@ package com.miamato.pageobject.clothstore;
 
 import com.miamato.PropertyManager;
 import com.miamato.pageobject.BasePage;
+import com.miamato.pageobject.PageManager;
 import com.miamato.valueobjects.Address;
 import com.miamato.valueobjects.Customer;
 import java.sql.Timestamp;
@@ -70,20 +71,26 @@ public class LoginPage extends BasePage {
 
 
 
-    public LoginPage(WebDriver driver, PropertyManager propertyManager){
-        super(driver, propertyManager);
+    public LoginPage(WebDriver driver, PropertyManager propertyManager, PageManager pageManager){
+        super(driver, propertyManager, pageManager);
     }
 
-    public LoginPage createNewAccount(Customer customer){
+    public PageManager createNewAccount(Customer customer){
         enterNewCustomerEmail(customer);
         clickCreateAccountButton();
         enterPersonalInformation(customer);
         enterAddress(customer);
         submitNewAccountButton.click();
-        return this;
+        return this.pageManager;
     }
 
-    public LoginPage enterNewCustomerEmail(Customer customer){
+    public PageManager pressCreateAccountButton(){
+        logger.info("Pressing create account button");
+        submitNewAccountButton.click();
+        return this.pageManager;
+    }
+
+    public PageManager enterNewCustomerEmail(Customer customer){
         logger.info("Generating unique email for customer");
         long customerIndex = new Timestamp(System.currentTimeMillis()).getTime();
         logger.info("Entering generated email: " + customerIndex + EMAIL_SUFFIX);
@@ -91,16 +98,16 @@ public class LoginPage extends BasePage {
             ExpectedConditions.visibilityOf(newCustomerEmailAddress)).sendKeys(customerIndex + EMAIL_SUFFIX);
         //newCustomerEmailAddress.sendKeys(customerIndex + EMAIL_SUFFIX);
         customer.setEmail(customerIndex+EMAIL_SUFFIX);
-        return this;
+        return this.pageManager;
     }
 
-    public LoginPage clickCreateAccountButton(){
+    public PageManager clickCreateAccountButton(){
         logger.info("Clicking create account button");
         createAccountButton.click();
-        return this;
+        return this.pageManager;
     }
 
-    public LoginPage enterPersonalInformation(Customer customer){
+    public PageManager enterPersonalInformation(Customer customer){
 
         new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(1))
             .until(ExpectedConditions.visibilityOf(personalInfoTitle));
@@ -114,15 +121,15 @@ public class LoginPage extends BasePage {
         selectFromDropdownByValue(birthDayDropdown, customer.birthDay, logger);
         selectFromDropdownByVisibleText(birthMonthDropdown, customer.birthMonth, logger);
         selectFromDropdownByValue(birtYearDropdown, customer.birthYear, logger);
-        return this;
+        return this.pageManager;
     }
 
-    public LoginPage enterAddress(Customer customer){
+    public PageManager enterAddress(Customer customer){
         enterAddress(customer.address);
-        return this;
+        return this.pageManager;
     }
 
-    public LoginPage enterAddress(Address address){
+    public PageManager enterAddress(Address address){
         logger.info("Entering name in address");
         addressFirstName.sendKeys(address.name);
         logger.info("Entering last name in address");
@@ -150,6 +157,6 @@ public class LoginPage extends BasePage {
         logger.info("Entering address alias");
         addressAlias.clear();
         addressAlias.sendKeys(address.addressAlias);
-        return this;
+        return this.pageManager;
     }
 }
