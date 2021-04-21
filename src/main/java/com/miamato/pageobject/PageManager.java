@@ -1,50 +1,79 @@
 package com.miamato.pageobject;
 
-import com.miamato.PropertyManager;
-import com.miamato.pageobject.clothstore.HomePage;
-import com.miamato.pageobject.clothstore.LoginPage;
-import com.miamato.pageobject.clothstore.MyAccountPage;
-import com.miamato.pageobject.clothstore.MyAddressesPage;
+import com.miamato.pageobject.screwfix.AddToBasketPopup;
+import com.miamato.pageobject.screwfix.BasketPage;
+import com.miamato.pageobject.screwfix.CategoriesPage;
+import com.miamato.pageobject.screwfix.CookiesPopUp;
+import com.miamato.pageobject.screwfix.Header;
+import com.miamato.pageobject.screwfix.HomePage;
+import java.time.Duration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageManager {
 
+    private static final Logger logger = LogManager.getLogger(PageManager.class.getSimpleName());
+
     public WebDriver driver;
-    public PropertyManager propertyManager;
-
     private HomePage homePage;
-    private LoginPage loginPage;
-    private MyAddressesPage myAddressesPage;
-    private MyAccountPage myAccountPage;
+    private Header header;
+    private CategoriesPage categoriesPage;
+    private BasketPage basketPage;
+    private AddToBasketPopup addToBasketPopup;
+    private CookiesPopUp cookiesPopUp;
 
-    public PageManager(WebDriver driver, PropertyManager propertyManager){
+    public PageManager(WebDriver driver){
         this.driver = driver;
-        this.propertyManager = propertyManager;
     }
 
     public HomePage homePage(){
         if(homePage == null)
-            homePage = new HomePage(driver, propertyManager, this);
+            homePage = new HomePage(driver, this);
         return homePage;
     }
-
-    public LoginPage loginPage(){
-        if(loginPage == null)
-            loginPage = new LoginPage(driver, propertyManager, this);
-        return loginPage;
+    public Header header(){
+        if(header == null)
+            header = new Header(driver, this);
+        return header;
     }
 
-    public MyAddressesPage myAddressesPage(){
-        if(myAddressesPage == null)
-            myAddressesPage = new MyAddressesPage(driver, propertyManager, this);
-        return myAddressesPage;
+    public CategoriesPage categoriesPage(){
+        if(categoriesPage == null)
+            categoriesPage = new CategoriesPage(driver, this);
+        return categoriesPage;
     }
 
-    public MyAccountPage myAccountPage(){
-        if(myAccountPage == null)
-            myAccountPage = new MyAccountPage(driver, propertyManager, this);
-        return myAccountPage;
+    public BasketPage basketPage(){
+        if(basketPage == null)
+            basketPage = new BasketPage(driver, this);
+        return basketPage;
     }
 
+    public AddToBasketPopup addToBasketPopup(){
+        if(addToBasketPopup == null)
+            addToBasketPopup = new AddToBasketPopup(driver, this);
+        return addToBasketPopup;
+    }
+
+    public CookiesPopUp cookiesPopUp(){
+        if(cookiesPopUp == null)
+            cookiesPopUp = new CookiesPopUp(driver, this);
+        return cookiesPopUp;
+    }
+
+    public PageManager open(String url){
+        logger.info("Opening page with url: " + url);
+        driver.navigate().to(url);
+        return this;
+    }
+
+    public PageManager waitForPageToLoad(){
+        logger.info("Waiting till next page is loaded");
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(
+            webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        return this;
+    }
 }

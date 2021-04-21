@@ -1,6 +1,5 @@
 package com.miamato.pageobject;
 
-import com.miamato.PropertyManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,18 +10,20 @@ import org.openqa.selenium.support.ui.Select;
 public abstract class BasePage extends Page {
 
     protected WebDriver driver;
-    protected PropertyManager propertyManager;
     protected PageManager pageManager;
 
-    public BasePage(WebDriver driver, PropertyManager propertyManager, PageManager pageManager){
+    public BasePage(WebDriver driver,PageManager pageManager){
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
-        this.propertyManager = propertyManager;
         this.pageManager = pageManager;
     }
 
-    public String getPageTitle(){
+    protected String getPageTitle(){
         return driver.getTitle();
+    }
+
+    protected void open(String url){
+        driver.navigate().to(url);
     }
 
     protected void selectFromDropdownByValue(WebElement element, String value, Logger logger){

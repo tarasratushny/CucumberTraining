@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Automation Training" parallel="tests" thread-count="4">
+<suite name="Automation Training">
   <listeners>
     <listener class-name="com.miamato.listeners.TestResultsListener" />
     <listener class-name="com.miamato.listeners.TestReporter" />
   </listeners>
-  <test name="Allure Reports Example Edge">
+  <test name="Example">
     <classes>
       <class name="com.miamato.runner.CucumberRunner" />
     </classes>
