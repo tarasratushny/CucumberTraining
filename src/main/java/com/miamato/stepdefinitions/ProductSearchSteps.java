@@ -3,6 +3,7 @@ package com.miamato.stepdefinitions;
 import com.miamato.PropertyManager;
 import com.miamato.context.CucumberStepContext;
 import com.miamato.pageobject.PageManager;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.Locale;
@@ -25,5 +26,12 @@ public class ProductSearchSteps {
             .header().initiateSearch();
     }
 
+
+    @Then("Search result count is more than {int}")
+    public void searchResultCountIsMoreThanSearchResultCount(int minSearchResultsCount) {
+        logger.info("Checking that search results count is more than " + minSearchResultsCount);
+        Assert.assertTrue(Integer.parseInt(pageManager.categoriesPage().searchResultCount.getAttribute("found"))
+            > minSearchResultsCount);
+    }
 
 }

@@ -16,9 +16,9 @@ public class CookiesPopUp extends BasePage {
     private static final Logger logger = LogManager.getLogger(CookiesPopUp.class.getSimpleName());
 
     @FindBy(xpath = "//div[@class='truste_box_overlay']//iframe")
-    WebElement cookiesOverlayFrame;
+    public WebElement cookiesOverlayFrame;
     @FindBy(xpath = "//a[text()='Accept Cookies']")
-    WebElement acceptAllCookiesButton;
+    public WebElement acceptAllCookiesButton;
 
     public CookiesPopUp(WebDriver driver,
         PageManager pageManager) {

@@ -15,17 +15,19 @@ public class CategoriesPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(CategoriesPage.class.getSimpleName());
 
     @FindAll(@FindBy(xpath = "//a[contains(@id, 'product_description_')]"))
-    List<WebElement> productTitles;
+    public List<WebElement> productTitles;
     @FindAll(@FindBy(xpath = "//span[contains(@id, 'product_quoteNo_')]"))
-    List<WebElement> productSkus;
+    public List<WebElement> productSkus;
     @FindAll(@FindBy(xpath = "//h4[contains(@id, 'product_list_price_')]"))
-    List<WebElement> productPrices;
+    public List<WebElement> productPrices;
     @FindAll(@FindBy(xpath = "//input[contains(@id, 'product_qty_')]"))
-    List<WebElement> productQuantityFields;
+    public List<WebElement> productQuantityFields;
     @FindAll(@FindBy(xpath = "//button[contains(@id, 'add_for_collection_button_')]"))
-    List<WebElement> addProductToClickCollectButtons;
+    public List<WebElement> addProductToClickCollectButtons;
     @FindAll(@FindBy(xpath = "//*[contains(@id, 'product_add_button_')]"))
-    List<WebElement> addProductToDeliveryButton;
+    public List<WebElement> addProductToDeliveryButton;
+    @FindBy(xpath = "//span[contains(@class, 'category-itemfound')]")
+    public WebElement searchResultCount;
 
     public CategoriesPage(WebDriver driver,
         PageManager pageManager) {

@@ -14,13 +14,13 @@ public class Header extends BasePage {
     private static final Logger logger = LogManager.getLogger(Header.class.getSimpleName());
 
     @FindBy(xpath = "//input[@id='mainSearch-input']")
-    WebElement searchField;
+    public WebElement searchField;
     @FindBy(xpath = "//input[@id='search_submit_button']")
-    WebElement searchButton;
+    public WebElement searchButton;
     @FindBy(xpath = "//i[@class='icon icon-basket']")
-    WebElement basketButton;
+    public WebElement basketButton;
     @FindAll(@FindBy(xpath = "//ul[@class='mn']/li"))
-    WebElement categoriesTopLevel;
+    public WebElement categoriesTopLevel;
 
     public Header(WebDriver driver,
         PageManager pageManager) {

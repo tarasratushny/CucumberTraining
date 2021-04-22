@@ -13,9 +13,9 @@ public class AddToBasketPopup extends BasePage {
     private static final Logger logger = LogManager.getLogger(AddToBasketPopup.class.getSimpleName());
 
     @FindBy(xpath = "//button[@id='checkout_now_btn']")
-    WebElement checkoutNowButton;
+    public WebElement checkoutNowButton;
     @FindBy(xpath = "//button[@id='continue_button_btn']")
-    WebElement continueShoppingButton;
+    public WebElement continueShoppingButton;
 
 
     public AddToBasketPopup(WebDriver driver,

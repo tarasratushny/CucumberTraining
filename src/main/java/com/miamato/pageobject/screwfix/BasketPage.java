@@ -11,17 +11,17 @@ import org.openqa.selenium.support.FindBy;
 public class BasketPage extends BasePage {
 
     @FindBy(xpath = "//button[@id='topCheckoutButton']")
-    WebElement continueToCheckoutTopButton;
+    public WebElement continueToCheckoutTopButton;
     @FindAll(@FindBy(xpath = "//a[starts-with(@id,'trolley_page_product_name_')]"))
-    List<WebElement> productForDeliveryNames;
+    public List<WebElement> productForDeliveryNames;
     @FindAll(@FindBy(xpath = "//a[starts-with(@id,'CPC_trolley_page_product_name_')]"))
-    List<WebElement> productForCollectionNames;
+    public List<WebElement> productForCollectionNames;
     @FindAll(@FindBy(xpath = "//a[starts-with(@id,'trolley_page_product_total_price_')]"))
-    List<WebElement> productForDeliveryPrices;
+    public List<WebElement> productForDeliveryPrices;
     @FindAll(@FindBy(xpath = "//a[starts-with(@id,'CPC_trolley_page_product_total_price_')]"))
-    List<WebElement> productForCollectionPrices;
+    public List<WebElement> productForCollectionPrices;
     @FindBy(xpath = "//div[@id='trolley_page_grand_total']")
-    WebElement basketGrandTotalPrice;
+    public WebElement basketGrandTotalPrice;
 
     public BasketPage(WebDriver driver,
         PageManager pageManager) {
