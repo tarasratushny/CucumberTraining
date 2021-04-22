@@ -10,17 +10,22 @@ public class PropertyManager {
 
     private static final Logger logger = LogManager.getLogger(PropertyManager.class.getSimpleName());
     //private static PropertyManager instance = null;
-    private static final Properties properties = new Properties();
+    private static final Properties testData = new Properties();
+    private static final Properties systemProperties = new Properties();
+    private static final String testDataFilesFolder = "testdata/";
+    private static final String systemPropertiesFolder = "systemConfig/";
+    private static final String systemPropertiesFilename = "setup.properties";
 
     public PropertyManager(String testDataFileName){
-        loadProperties(System.getProperty("test.data.folder") + testDataFileName);
+        loadSystemProperties(systemPropertiesFilename);
+        loadProperties(testDataFilesFolder + testDataFileName, testData);
     }
 
     public String getProperty(String propertyName){
-        return properties.getProperty(propertyName);
+        return testData.getProperty(propertyName);
     }
 
-    private void loadProperties(String filePath){
+    private void loadProperties(String filePath, Properties properties){
         logger.info("Trying to access property file: " + filePath);
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
             properties.load(inputStream);
@@ -28,5 +33,13 @@ public class PropertyManager {
             logger.error("Property file with path: " + filePath + " cannot be opened");
             LogUtil.logStackTrace(e, logger);
         }
+    }
+
+    private void loadSystemProperties(String filename){
+        logger.info("Loading system properties from file");
+        systemProperties.putAll(System.getProperties());
+        loadProperties(systemPropertiesFolder + filename, systemProperties);
+        logger.info("Setting up system properties");
+        System.setProperties(systemProperties);
     }
 }

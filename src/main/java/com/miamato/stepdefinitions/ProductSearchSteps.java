@@ -17,9 +17,11 @@ public class ProductSearchSteps {
     PropertyManager propertyManager;
     @Before
     public void setup(){
+        System.out.println(System.getProperty("os.name"));
+        propertyManager = new PropertyManager("screwfix.properties");
+        System.out.println(System.getProperty("os.name"));
         driver = DriverManager.getDriver("Chrome", "GRID");
         pageManager = new PageManager(driver);
-        propertyManager = new PropertyManager("screwfix.properties");
     }
 
     @After

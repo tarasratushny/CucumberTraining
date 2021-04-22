@@ -9,7 +9,7 @@
   <version>1.0</version>
 
   <properties>
-    <version.testng>7.3.0</version.testng>
+    <version.junit>4.13.2</version.junit>
     <version.selenium>4.0.0-beta-2</version.selenium>
     <version.selenium.server>4.0.0-alpha-2</version.selenium.server>
     <selenium.grid.url>http://192.168.56.1:4444</selenium.grid.url>
@@ -48,9 +48,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>${version.testng}</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${version.junit}</version>
     </dependency>
 
     <dependency>
@@ -91,14 +91,6 @@
       <version>${version.aspectj}</version>
     </dependency>
 
-    <!-- Commented out as currently not needed for example.
-    <dependency>
-      <groupId>io.qameta.allure</groupId>
-      <artifactId>allure-testng</artifactId>
-      <version>${version.allure}</version>
-    </dependency>
-    -->
-
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
@@ -119,7 +111,7 @@
 
     <dependency>
       <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-testng</artifactId>
+      <artifactId>cucumber-junit</artifactId>
       <version>${version.cucumber}</version>
     </dependency>
 
@@ -199,20 +191,12 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${version.surefire.plugin}</version>
         <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>${basedir}/TestNG.xml</suiteXmlFile>
-          </suiteXmlFiles>
           <argLine>
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${version.aspectj}/aspectjweaver-${version.aspectj}.jar"
           </argLine>
-          <systemPropertyVariables>
-            <webdriver.chrome.driver>${driver.folder}/chromedriver.exe</webdriver.chrome.driver>
-            <webdriver.gecko.driver>${driver.folder}/geckodriver.exe</webdriver.gecko.driver>
-            <webdriver.edge.driver>${driver.folder}/msedgedriver.exe</webdriver.edge.driver>
-            <test.data.folder>${test.data.folder}</test.data.folder>
-            <allure.results.directory>${basedir}/${allure.results.path}</allure.results.directory>
-            <selenium.grid.url>${selenium.grid.url}</selenium.grid.url>
-          </systemPropertyVariables>
+          <includes>
+            <include>**/CucumberRunner.java</include>
+          </includes>
         </configuration>
         <dependencies>
           <dependency>
@@ -223,20 +207,6 @@
         </dependencies>
       </plugin>
 
-      <!-- Commented out as currently not needed for example.
-
-      <plugin>
-        <groupId>io.qameta.allure</groupId>
-        <artifactId>allure-maven</artifactId>
-        <version>${version.allure.maven}</version>
-        <configuration>
-          <reportVersion>${version.allure.reports}</reportVersion>
-          <allureDownloadUrl>https://github.com/allure-framework/allure2/releases/download/${version.allure.reports}/allure-${version.allure.reports}.zip</allureDownloadUrl>
-          <propertiesFilePath>${basedir}/src/main/resources/allure.properties</propertiesFilePath>
-          <reportDirectory>${basedir}/target/allure-report</reportDirectory>
-        </configuration>
-      </plugin>
-      -->
     </plugins>
   </build>
 
