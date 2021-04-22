@@ -23,7 +23,8 @@ public class NavigationSteps {
     public void customerIsOnPageWithUrlHomePageUrl(String pageName) {
         pageManager.open(propertyManager.getProperty(pageName))
             .waitForPageToLoad()
-            .cookiesPopUp().acceptAllCookies();
+            .cookiesPopUp().acceptAllCookies()
+            .waitForPageToLoad();
     }
 
     @Then("Page title contains {string}")

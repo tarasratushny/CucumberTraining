@@ -1,5 +1,7 @@
 Feature: product search
-  customer should be able to use product search
+  As a: customer
+  I want: to have product search
+  So that: I can find required product by name or sku
 
   Scenario Outline: Direct Hit Search
     Given Customer is on page with url 'home.page.url'

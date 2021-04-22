@@ -3,8 +3,11 @@ package com.miamato.stepdefinitions;
 import com.miamato.PropertyManager;
 import com.miamato.context.CucumberStepContext;
 import com.miamato.pageobject.PageManager;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.List;
+import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -16,7 +19,7 @@ public class ProductSearchSteps {
 
     WebDriver driver = CucumberStepContext.getInstance().getDriver();
     PageManager pageManager = CucumberStepContext.getInstance().getPageManager();
-    PropertyManager propertyManager = CucumberStepContext.getInstance().getPropertyManager();;
+    PropertyManager propertyManager = CucumberStepContext.getInstance().getPropertyManager();
 
     @When("Customer performs search for {string}")
     public void customer_performs_search_for(String searchTermPropertyName) {
@@ -32,4 +35,24 @@ public class ProductSearchSteps {
             > minSearchResultsCount);
     }
 
+    @When("Customer adds multiple products from search")
+    public void customerAddsMultipleProductsFromSearch(DataTable dataTable) {
+        List<Map<String,String>> rows = dataTable.asMaps(String.class, String.class);
+        for(Map<String, String> column : rows){
+            logger.info("searching for " + propertyManager.getProperty(column.get("direct hit search term")));
+           pageManager.header().enterSearchTerm(
+               propertyManager.getProperty(column.get("direct hit search term")))
+               .header().initiateSearch();
+           addProductToBasket(propertyManager.getProperty(column.get("shipping method")));
+        }
+    }
+
+    private void addProductToBasket(String shippingMethod){
+        if(shippingMethod.equals(propertyManager.getProperty("shipping.method.home.delivery"))) {
+            pageManager.productDetailsPage().addProductToHomeDelivery()
+                .addToBasketPopup().proceedToBasket();
+        } else if (shippingMethod.equals(propertyManager.getProperty("shipping.method.click.collect"))){
+            pageManager.productDetailsPage().addToCollectionButton.click();
+        }
+    }
 }
