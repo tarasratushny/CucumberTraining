@@ -6,6 +6,7 @@ import com.miamato.pageobject.screwfix.CategoriesPage;
 import com.miamato.pageobject.screwfix.CookiesPopUp;
 import com.miamato.pageobject.screwfix.Header;
 import com.miamato.pageobject.screwfix.HomePage;
+import com.miamato.pageobject.screwfix.ProductDetailsPage;
 import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,7 @@ public class PageManager {
     private BasketPage basketPage;
     private AddToBasketPopup addToBasketPopup;
     private CookiesPopUp cookiesPopUp;
+    private ProductDetailsPage productDetailsPage;
 
     public PageManager(WebDriver driver){
         this.driver = driver;
@@ -62,6 +64,12 @@ public class PageManager {
         if(cookiesPopUp == null)
             cookiesPopUp = new CookiesPopUp(driver, this);
         return cookiesPopUp;
+    }
+
+    public ProductDetailsPage productDetailsPage(){
+        if(productDetailsPage == null)
+            productDetailsPage = new ProductDetailsPage(driver, this);
+        return productDetailsPage;
     }
 
     public PageManager open(String url){

@@ -16,11 +16,9 @@ public class CucumberRunner {
     @BeforeClass
     public static void setup(){
         CucumberStepContext.getInstance().setPropertyManager(new PropertyManager("screwfix.properties"));
-        System.out.println("Hello, setup was executed");
     }
 
     @AfterClass
     public static void tearDown(){
-        System.out.println("Hello, teardown was executed");
     }
 }
