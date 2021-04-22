@@ -18,11 +18,18 @@ public class ProductInformationSteps {
     PageManager pageManager = CucumberStepContext.getInstance().getPageManager();
     PropertyManager propertyManager = CucumberStepContext.getInstance().getPropertyManager();
 
-    @Then("Product page contains {string}")
-    public void productPageContainsDirectProductName(String productName) {
+    @Then("Product name on product page contains {string}")
+    public void productNameOnProductPageContainsDirectHitProductName(String propertyForProductName) {
         logger.info("Checking if product name is correct on product details page");
-        Assert.assertEquals(propertyManager.getProperty(productName).toUpperCase(Locale.ROOT),
+        Assert.assertEquals(propertyManager.getProperty(propertyForProductName).toUpperCase(Locale.ROOT),
             pageManager.productDetailsPage().productName.getText().trim());
     }
 
+
+    @Then("Sku on product page is {string}")
+    public void skuOnProductPageIsDirectHitProductSku(String propertyForSku) {
+        logger.info("Checking if product sku is correct on product details page");
+        Assert.assertEquals(propertyManager.getProperty(propertyForSku).toUpperCase(Locale.ROOT),
+            pageManager.productDetailsPage().productSku.getText());
+    }
 }

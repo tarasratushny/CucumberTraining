@@ -10,6 +10,8 @@ public class ProductDetailsPage extends BasePage {
 
     @FindBy(xpath = "//h1[@id='product_description']/span[@itemprop='name']")
     public WebElement productName;
+    @FindBy(xpath = "//span[@itemprop='productID']")
+    public WebElement productSku;
     @FindBy(xpath = "//button[@id='product_add_to_trolley_image']")
     public WebElement addToDeliveryButton;
     @FindBy(xpath = "//button[contains(@id,'add_for_collection_button_')]")
