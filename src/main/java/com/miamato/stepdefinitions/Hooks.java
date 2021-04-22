@@ -1,5 +1,6 @@
 package com.miamato.stepdefinitions;
 
+import com.miamato.PropertyManager;
 import com.miamato.context.CucumberStepContext;
 import com.miamato.drivers.DriverManager;
 import com.miamato.pageobject.PageManager;
@@ -10,6 +11,7 @@ public class Hooks {
 
     @Before
     public void setup(){
+        CucumberStepContext.getInstance().setPropertyManager(new PropertyManager("screwfix.properties"));
         CucumberStepContext.getInstance().setDriver(DriverManager.getDriver("Chrome", "GRID"));
         CucumberStepContext.getInstance().setPageManager( new PageManager(CucumberStepContext.getInstance().getDriver()));
     }
