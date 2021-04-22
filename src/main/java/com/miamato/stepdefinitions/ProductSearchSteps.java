@@ -3,7 +3,6 @@ package com.miamato.stepdefinitions;
 import com.miamato.PropertyManager;
 import com.miamato.context.CucumberStepContext;
 import com.miamato.pageobject.PageManager;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,16 +10,9 @@ import org.openqa.selenium.WebDriver;
 
 public class ProductSearchSteps {
 
-    WebDriver driver;
-    PageManager pageManager;
-    PropertyManager propertyManager;
-
-    @Before
-    public void setup(){
-        propertyManager = CucumberStepContext.getInstance().getPropertyManager();
-        driver = CucumberStepContext.getInstance().getDriver();
-        pageManager = CucumberStepContext.getInstance().getPageManager();
-    }
+    WebDriver driver = CucumberStepContext.getInstance().getDriver();
+    PageManager pageManager = CucumberStepContext.getInstance().getPageManager();
+    PropertyManager propertyManager = CucumberStepContext.getInstance().getPropertyManager();;
 
     @Given("Customer is on page with url {string}")
     public void customerIsOnPageWithUrlHomePageUrl(String pageName) {
