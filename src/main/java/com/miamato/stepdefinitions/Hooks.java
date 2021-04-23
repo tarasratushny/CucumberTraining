@@ -1,6 +1,6 @@
 package com.miamato.stepdefinitions;
 
-import com.miamato.PropertyManager;
+import com.miamato.properties.PropertyManager;
 import com.miamato.context.CucumberStepContext;
 import com.miamato.drivers.DriverManager;
 import com.miamato.pageobject.PageManager;

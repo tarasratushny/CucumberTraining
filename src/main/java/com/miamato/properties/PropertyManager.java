@@ -1,5 +1,6 @@
-package com.miamato;
+package com.miamato.properties;
 
+import com.miamato.utils.LogUtil;
 import java.io.InputStream;
 import java.util.Properties;
 import org.apache.logging.log4j.LogManager;

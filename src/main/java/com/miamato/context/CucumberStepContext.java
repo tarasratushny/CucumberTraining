@@ -1,6 +1,6 @@
 package com.miamato.context;
 
-import com.miamato.PropertyManager;
+import com.miamato.properties.PropertyManager;
 import com.miamato.pageobject.PageManager;
 import org.openqa.selenium.WebDriver;
 

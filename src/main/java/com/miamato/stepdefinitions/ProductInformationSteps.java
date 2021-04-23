@@ -1,6 +1,6 @@
 package com.miamato.stepdefinitions;
 
-import com.miamato.PropertyManager;
+import com.miamato.properties.PropertyManager;
 import com.miamato.context.CucumberStepContext;
 import com.miamato.pageobject.PageManager;
 import io.cucumber.java.en.Then;
