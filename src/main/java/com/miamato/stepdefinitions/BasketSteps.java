@@ -22,11 +22,11 @@ public class BasketSteps {
     @Then("Products should be present on basket page")
     public void productsShoudlBePresentOnBasketPage(DataTable dataTable){
         List<Map<String,String>> rows = dataTable.asMaps(String.class, String.class);
-        int i = 0;
-        for(Map<String, String> column : rows){
-            checkProductInBasket(propertyManager.getProperty(column.get("product name")), i);
-            i++;
-        }
+
+        rows.forEach(
+            column -> checkProductInBasket(
+                propertyManager.getProperty(column.get("product name"))
+                , Integer.parseInt(column.get("position"))));
     }
 
     private void checkProductInBasket(String productName, int position){

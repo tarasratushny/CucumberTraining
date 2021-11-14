@@ -15,7 +15,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class DriverManager {
     private static final Logger log = LogManager.getLogger(DriverManager.class.getSimpleName());
 
-    public WebDriver getDriver(String driverType){
+    public static WebDriver getDriver(String driverType){
         return getDriver(driverType, "LOCAL");
     }
 

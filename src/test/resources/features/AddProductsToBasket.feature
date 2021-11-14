@@ -10,6 +10,6 @@ Feature: Adding products to basket
     |default.product.short.name|shipping.method.home.delivery|
     |complex.product.sku       |shipping.method.home.delivery|
     Then Products should be present on basket page
-    |product name        |
-    |default.product.name|
-    |complex.product.name|
+    |product name        |position|
+    |default.product.name|0       |
+    |complex.product.name|1       |

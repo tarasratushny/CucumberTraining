@@ -22,8 +22,8 @@
     <version.log4j>2.14.1</version.log4j>
 
     <version.download-maven-plugin>1.6.1</version.download-maven-plugin>
-    <version.chromedriver>89.0.4389.23</version.chromedriver>
-    <md5.chromedriver>0bf4bc39f34cee67f5f95afd8a24c191</md5.chromedriver>
+    <version.chromedriver>95.0.4638.69</version.chromedriver>
+    <md5.chromedriver>82a40345336b35b9c3f1779f5089cfd3</md5.chromedriver>
     <version.geckodriver>v0.29.0</version.geckodriver>
     <!-- 32 bit
     <md5.geckodriver>dc1f5f2d3bc32565e59f1ce3a32b8d3d</md5.geckodriver>
